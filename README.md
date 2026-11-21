@@ -3,10 +3,10 @@
 <p align="center"><b>Run command lists on many network devices over SSH from one window</b></p>
 
 <p align="center">
-  ![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
-  ![Platform](https://img.shields.io/badge/platform-Windows-0078D6?logo=windows&logoColor=white)
-  ![Updated](https://img.shields.io/badge/updated-2025-10-28-success)
-  [![Releases](https://img.shields.io/badge/downloads-Releases-blue)](https://github.com/alisadhk/hkssh/releases/latest)
+  <img src="https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/platform-Windows-0078D6?logo=windows&logoColor=white" alt="Platform">
+  <img src="https://img.shields.io/badge/updated-2025--10--28-success" alt="Updated">
+  <a href="https://github.com/alisadhk/hkssh/releases/latest"><img src="https://img.shields.io/badge/downloads-Releases-blue" alt="Releases"></a>
 </p>
 
 ---
@@ -22,8 +22,24 @@ HKssh is a PyQt5 automation tool that connects to a list of devices via SSH (par
 - Start / Stop execution, progress bar and Save Output
 - Separate panel for connection issues and invalid IP addresses
 - 30-day trial with activation dialog
+- Push the same command set to hundreds of SSH-reachable devices (Cisco, MikroTik and similar)
+- Live output viewer with per-device connection status
+- Standalone executable: no Python or terminal needed
+- Invalid IP lines are reported separately in the Connection Issues panel
+
+## How it works
+- HKssh reads your IP list file and opens an SSH session (paramiko) to each device in turn.
+- It logs in, enters enable mode if an Enable password is provided, then sends every line of the command block with the configured delay.
+- The output of each device is streamed to the **Execution Output** panel; failures and invalid IPs go to **Connection Issues**.
+- When the run ends you can save the whole output to a file.
+
+## Requirements
+- Windows 10/11.
+- SSH enabled on the target devices and reachable from your PC.
+- Python 3.10+, PyQt5 and paramiko if you run from source.
 
 ## Screenshots
+<p align="center"><img src="screenshots/overview.png" alt="HKssh screenshot" width="720"></p>
 <p align="center"><img src="screenshots/screenshot-1.png" alt="HKssh screenshot" width="720"></p>
 
 ## Download and install
@@ -58,6 +74,11 @@ python 1111.py
 ## Configuration and privacy
 - All sensitive values from the original private version (passwords, tokens, license codes, user names, internal IP addresses, personal names and links) were replaced with `*****`.
 - The activation code and the HMAC secret are masked (`*****`). Set your own values in 1111.py before building a licensed version, or use the trial.
+
+## Troubleshooting
+- Authentication failed: check the user name, password and Enable password.
+- Commands cut short: increase **Command Delay** (slow devices need more time).
+- Devices skipped: make sure the IP list has one valid IPv4 address per line.
 
 ## Build the executable yourself
 ```bash
